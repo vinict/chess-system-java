@@ -30,4 +30,14 @@ public class Board {
         this.columns = columns;
     }
     
+    public Piece piece(int row, int column){ /* Retornar a linha e a coluna da peça */
+    
+        return pieces[row][column];
+    }
+    
+    public Piece piece(Position position){
+        
+        return pieces[position.getRow()][position.getColumn()]; /* Retornar a peça pela posição dela */
+    }
+    
 }
