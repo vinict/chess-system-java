@@ -47,6 +47,20 @@ public class Board {
         piece.position = position; /* Conseguimos acessar a posição da peça sendo ela protected, pois tanto Piece como Board estão no mesmo pacote */
     }
     
+    public Piece removePiece(Position position){
+        if(!positionExists(position)){
+            throw new BoardException("Position not on the board!");
+        }
+        if(piece(position) == null){
+            return null;
+        }else{
+            Piece aux = piece(position);
+            aux.position = null;
+            pieces[position.getRow()][position.getColumn()] = null;
+            return aux;
+        }
+    }
+    
     private boolean positionExists(int row, int column){ /* Verificação se uma posição existe, verificando as linhas e colunas da matriz */
         return (row >= 0 && row < rows && column >=0 && column < columns);  
     }
