@@ -40,4 +40,11 @@ public class Board {
         return pieces[position.getRow()][position.getColumn()]; /* Retornar a peça pela posição dela */
     }
     
+    public void placePiece(Piece piece, Position position){ /* Pegar a matriz na posição informada (row + column) e posicionar a peça em tal posição */
+        pieces[position.getRow()][position.getColumn()] = piece;
+        piece.position = position; /* Conseguimos acessar a posição da peça sendo ela protected, pois tanto Piece como Board estão no mesmo pacote */
+    }
+    
+    
+    
 }
