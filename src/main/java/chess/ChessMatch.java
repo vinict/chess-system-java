@@ -5,12 +5,16 @@ import boardgame.Piece;
 import boardgame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChessMatch {
     
     private Board board;
     private int turn;
     private Color currentPlayer;
+    private List<Piece> piecesOnTheBoard = new ArrayList<>(); /* Lista de peças no tabuleiro */
+    private List<Piece> capturedPieces = new ArrayList<>(); /*Lista de peças capturadas */
     
     public ChessMatch(){
         board = new Board(8, 8);
@@ -39,8 +43,9 @@ public class ChessMatch {
         return mat;
     }
     
-    private void placeNewPiece(char column, int row, ChessPiece piece){
+    private void placeNewPiece(char column, int row, ChessPiece piece){ /* Método para inicialização do tabuleiro, colocando as peças nos lugares */
         board.placePiece(piece, new ChessPosition(column, row).toPosition());
+        piecesOnTheBoard.add(piece); 
     }
     
     public boolean[][] possiblesMoves(ChessPosition sourcePosition){ /* Imprimir os movimentos possiveis a partir de um ponto de origem */
@@ -63,6 +68,12 @@ public class ChessMatch {
         Piece p = board.removePiece(source); /* Removendo a peça da posição de origem */
         Piece capturedPiece = board.removePiece(target); /* Removendo a possivel peça que está na posição de destino */
         board.placePiece(p, target);
+        
+        if(capturedPiece != null){ /* Se a peça capturada for diferente de nulo, significa que tem uma peça capturada! */
+            piecesOnTheBoard.remove(capturedPiece); /* Removendo a peça capturada do tabuleiro */
+            capturedPieces.add(capturedPiece); /* Adicionando a peça capturada na lista de peças capturadas */
+        }
+        
         
         return capturedPiece;
     }

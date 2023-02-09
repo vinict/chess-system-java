@@ -8,6 +8,8 @@ import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
 import java.util.InputMismatchException;
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class ChessSystem {
@@ -15,12 +17,13 @@ public class ChessSystem {
     public static void main(String[] args) {
         
         Scanner sc = new Scanner(System.in);
-        chess.ChessMatch chessMatch = new ChessMatch();
+        ChessMatch chessMatch = new ChessMatch();
+        List<ChessPiece> captured = new ArrayList<>();
         
         while(true){
             try{
                 UI.clearScreen();
-                UI.printMatch(chessMatch); /* User interface para receber a matriz de peças da partida e mostrá-la*/
+                UI.printMatch(chessMatch, captured); /* User interface para receber a matriz de peças da partida e mostrá-la*/
 
                 System.out.println();
                 System.out.print("Source: ");
@@ -36,6 +39,10 @@ public class ChessSystem {
                 System.out.println();
 
                 ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+                
+                if(capturedPiece != null){
+                    captured.add(capturedPiece);
+                }
             }
             catch(ChessException e){
                 System.out.println(e.getMessage());
