@@ -20,7 +20,7 @@ public class ChessSystem {
         ChessMatch chessMatch = new ChessMatch();
         List<ChessPiece> captured = new ArrayList<>();
         
-        while(true){
+        while(!chessMatch.getCheckMate()){
             try{
                 UI.clearScreen();
                 UI.printMatch(chessMatch, captured); /* User interface para receber a matriz de peças da partida e mostrá-la*/
@@ -52,9 +52,8 @@ public class ChessSystem {
                 System.out.println(e.getMessage());
                 sc.nextLine();
             }
-        }   
-        
-        
-        
+        }
+        UI.clearScreen();
+        UI.printMatch(chessMatch, captured);
     }
 }
