@@ -20,7 +20,7 @@ public class ChessSystem {
         while(true){
             try{
                 UI.clearScreen();
-                UI.printBoard(chessMatch.getPieces()); /* User interface para receber a matriz de peças da partida e mostrá-la*/
+                UI.printMatch(chessMatch); /* User interface para receber a matriz de peças da partida e mostrá-la*/
 
                 System.out.println();
                 System.out.print("Source: ");
